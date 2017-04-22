@@ -1,0 +1,90 @@
+{
+  "name": "jakehschwartz/swagger-finatra",
+  "version": "0.1.4",
+  "libraries": {
+    "xv": "^1.1.25"
+  },
+  "title": "Swagger Support for Finatra",
+  "branch": "master",
+  "style": {
+    "name": "Brutalist",
+    "componentSet": {
+      "nav": "nav/BasicNav",
+      "header": "header/BasicHeader",
+      "article": "article/MarkdownArticle",
+      "footer": "footer/BasicFooter"
+    },
+    "fontFamily": "Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
+    "heading": {},
+    "typeScale": [
+      48,
+      32,
+      20,
+      18,
+      16,
+      14,
+      12
+    ],
+    "layout": {
+      "maxWidth": 1024,
+      "fluid": true
+    },
+    "colors": {
+      "text": "#333",
+      "background": "#fff",
+      "primary": "#666",
+      "secondary": "#888",
+      "highlight": "#1f80ff",
+      "muted": "#f6f6f6",
+      "border": "#eee"
+    }
+  },
+  "content": [
+    {
+      "component": "nav",
+      "links": [
+        {
+          "href": "https://github.com/jakehschwartz/swagger-finatra",
+          "text": "GitHub"
+        }
+      ]
+    },
+    {
+      "component": "header",
+      "heading": "swagger-finatra",
+      "subhead": "Finatra Swagger Support",
+      "children": [
+        {
+          "component": "ui/TweetButton",
+          "text": "swagger-finatra: Finatra Swagger Support",
+          "url": null
+        },
+        {
+          "component": "ui/GithubButton",
+          "user": "jakehschwartz",
+          "repo": "swagger-finatra"
+        }
+      ]
+    },
+    {
+      "component": "article",
+      "metadata": {
+        "source": "github.readme"
+      },
+      "html": "\n<p>Add Swagger support for Finatra (1.6 and 2.2.0) web framework.</p>\n<p>It requires Java 8 from version 0.6.0.</p>\n<h1>Getting started</h1>\n<h2>Gradle</h2>\n<h4>Add repository</h4>\n<pre><span class=\"hljs-section\">repositories</span> {\n  <span class=\"hljs-section\">maven</span> { <span class=\"hljs-attribute\">url</span> <span class=\"hljs-string\">&quot;https://oss.sonatype.org/content/repositories/releases/&quot;</span> }\n}</pre><h4>Add Dependency</h4>\n<h5>Scala 2.10, Finatra 2.2.0</h5>\n<pre><span class=\"hljs-selector-tag\">compile</span> &quot;<span class=\"hljs-selector-tag\">com</span><span class=\"hljs-selector-class\">.github</span><span class=\"hljs-selector-class\">.xiaodongw</span><span class=\"hljs-selector-pseudo\">:swagger-finatra_2.10</span><span class=\"hljs-selector-pseudo\">:0.7.2&quot;</span></pre><h5>Scala 2.11, Finatra 2.2.0</h5>\n<pre><span class=\"hljs-selector-tag\">compile</span> &quot;<span class=\"hljs-selector-tag\">com</span><span class=\"hljs-selector-class\">.github</span><span class=\"hljs-selector-class\">.xiaodongw</span><span class=\"hljs-selector-pseudo\">:swagger-finatra_2.11</span><span class=\"hljs-selector-pseudo\">:0.7.2&quot;</span></pre><h2>SBT</h2>\n<pre>resolvers += <span class=\"hljs-string\">&quot;Sonatype OSS Snapshots&quot;</span> <span class=\"hljs-keyword\">at</span> <span class=\"hljs-string\">&quot;https://oss.sonatype.org/content/repositories/releases/&quot;</span></pre><h4>Add Dependency</h4>\n<h5>Finatra 2.2.0</h5>\n<pre>libraryDependencies += <span class=\"hljs-string\">&quot;com.github.xiaodongw&quot;</span> %% <span class=\"hljs-string\">&quot;swagger-finatra&quot;</span> % <span class=\"hljs-string\">&quot;0.7.2&quot;</span></pre><h2>Add document information for you controller</h2>\n<pre><span class=\"hljs-class\"><span class=\"hljs-keyword\">object</span> <span class=\"hljs-title\">SampleSwagger</span> <span class=\"hljs-keyword\">extends</span> <span class=\"hljs-title\">Swagger</span></span>\n\n<span class=\"hljs-class\"><span class=\"hljs-keyword\">class</span> <span class=\"hljs-title\">SampleController</span> <span class=\"hljs-keyword\">extends</span> <span class=\"hljs-title\">Controller</span> <span class=\"hljs-keyword\">with</span> <span class=\"hljs-title\">SwaggerSupport</span> </span>{\n  <span class=\"hljs-keyword\">implicit</span> <span class=\"hljs-keyword\">protected</span> <span class=\"hljs-keyword\">val</span> swagger = <span class=\"hljs-type\">SampleSwagger</span>\n\n  getWithDoc(<span class=\"hljs-string\">&quot;/students/:id&quot;</span>) { o =&gt;\n    o.summary(<span class=\"hljs-string\">&quot;Read the detail information about the student&quot;</span>)\n      .tag(<span class=\"hljs-string\">&quot;Student&quot;</span>)\n      .routeParam[<span class=\"hljs-type\">String</span>](<span class=\"hljs-string\">&quot;id&quot;</span>, <span class=\"hljs-string\">&quot;the student id&quot;</span>)\n      .responseWith[<span class=\"hljs-type\">Student</span>](<span class=\"hljs-number\">200</span>, <span class=\"hljs-string\">&quot;the student details&quot;</span>)\n      .responseWith(<span class=\"hljs-number\">404</span>, <span class=\"hljs-string\">&quot;the student is not found&quot;</span>)\n  } { request =&gt;\n    ...\n  }</pre><h2>Add document controller</h2>\n<h5>Finatra 2.2.0</h5>\n<pre><span class=\"hljs-class\"><span class=\"hljs-keyword\">object</span> <span class=\"hljs-title\">SampleApp</span> <span class=\"hljs-keyword\">extends</span> <span class=\"hljs-title\">HttpServer</span> </span>{\n  <span class=\"hljs-keyword\">val</span> info = <span class=\"hljs-keyword\">new</span> <span class=\"hljs-type\">Info</span>()\n    .description(<span class=\"hljs-string\">&quot;The Student / Course management API, this is a sample for swagger document generation&quot;</span>)\n    .version(<span class=\"hljs-string\">&quot;1.0.1&quot;</span>)\n    .title(<span class=\"hljs-string\">&quot;Student / Course Management API&quot;</span>)\n  <span class=\"hljs-type\">SampleSwagger</span>.info(info)\n\n  <span class=\"hljs-keyword\">override</span> <span class=\"hljs-function\"><span class=\"hljs-keyword\">def</span> <span class=\"hljs-title\">configureHttp</span></span>(router: <span class=\"hljs-type\">HttpRouter</span>) {\n    router\n      .add[<span class=\"hljs-type\">WebjarsController</span>]\n      .add(<span class=\"hljs-keyword\">new</span> <span class=\"hljs-type\">SwaggerController</span>(swagger = <span class=\"hljs-type\">SampleSwagger</span>))\n      ...\n  }\n}</pre><p>Swagger API document: <code>http://localhost:8888/api-docs/model</code></p>\n<p>Swagger UI: <code>http://localhost:8888/api-docs/ui</code></p>\n<h1>Finatra 1.6</h1>\n<p>Previous version of Finatra (1.6) is also supported, Check <a href=\"finatra1.md\">here</a> for the guide.</p>\n"
+    },
+    {
+      "component": "footer",
+      "links": [
+        {
+          "href": "https://github.com/jakehschwartz/swagger-finatra",
+          "text": "GitHub"
+        },
+        {
+          "href": "https://github.com/jakehschwartz",
+          "text": "jakehschwartz"
+        }
+      ]
+    }
+  ]
+}
