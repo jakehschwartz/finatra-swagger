@@ -1,4 +1,7 @@
 # finatra-swagger
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/02f5a150c842471cb8415b6510ed0ab6)](https://www.codacy.com/app/jakehschwartz54/finatra-swagger?utm_source=github.com&utm_medium=referral&utm_content=jakehschwartz/finatra-swagger&utm_campaign=badger)
+
 Add [Swagger UI](http://swagger.io/swagger-ui/) support to [Finatra](https://github.com/twitter/finatra) web framework.
 
 Currently only supports Scala 2.12 with Finatra 2.9. 
