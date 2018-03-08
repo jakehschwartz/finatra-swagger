@@ -114,9 +114,7 @@ class FinatraOperation(operation: Operation) {
     //todo not working, sample is not in the generated api, waiting for swagger fix
     example.foreach { e =>
       if(ref != null) {
-        val example = Json.mapper.writeValueAsString(e)
-
-        ref.setExample(example)
+        ref.setExample(e)
         //val model = api.swagger.getDefinitions.get(ref.asInstanceOf[RefProperty].getSimpleRef)
         //model.setExample(example)
       }
