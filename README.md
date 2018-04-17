@@ -14,7 +14,7 @@ For older versions, see the original repository by [xiaodongw](https://github.co
 
 The major and minor version of the library matches the Finatra major and minor version:
 
-    libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "17.12.0"
+    libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "18.3.2"
 
 First, create a subclass of a SwaggerModule
 
