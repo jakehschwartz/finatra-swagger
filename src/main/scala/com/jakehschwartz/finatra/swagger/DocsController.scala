@@ -28,7 +28,7 @@ class DocsController @Inject()(swagger: Swagger,
   get(s"$endpoint") { _: Request =>
     response
       .temporaryRedirect
-      .location(s"$endpoint/swagger-ui/3.12.0/index.html?url=/swagger.json")
+      .location(s"$endpoint/swagger-ui/3.12.1/index.html?url=/swagger.json")
   }
 
   private val defaultExpireTimeMillis: Long = 86400000L // 1 day
