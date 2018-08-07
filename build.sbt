@@ -47,10 +47,7 @@ credentials += Credentials(
   sys.env.getOrElse("SONATYPE_PASSWORD", "")
 )
 
-inScope(Global)(List(
-  PgpKeys.pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray()),
-  PgpKeys. := sys.env.get("PGP_SECRET").map(_.toLong)
-))
+pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray())
 
 // License of your choice
 licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
