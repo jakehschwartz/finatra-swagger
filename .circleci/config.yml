@@ -63,6 +63,10 @@ jobs:
         command: |
           sbt publishSigned
     - run:
+        name: Pause
+        command: |
+          sleep 30s
+    - run:
         name: Sonatype Release
         command: |
           sbt sonatypeRelease
