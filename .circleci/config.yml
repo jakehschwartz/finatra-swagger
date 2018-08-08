@@ -53,6 +53,11 @@ jobs:
     - restore_cache:
         key: finatra-swagger-target-cache-{{ .Environment.CIRCLE_WORKFLOW_ID }}
     - run:
+        name: Decrypt Secrets
+        command: |
+          openssl aes-256-cbc -d -in secret-pubring.asc -k $ENCRYPTION_KEY > ~/.sbt/gpg/pubring.asc
+          openssl aes-256-cbc -d -in secret-secring.asc -k $ENCRYPTION_KEY > ~/.sbt/gpg/secring.asc
+    - run:
         name: Publish Signed
         command: |
           sbt publishSigned
