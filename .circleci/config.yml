@@ -78,4 +78,4 @@ workflows:
         filters:
           branches:
             only:
-            - /test-ci-publish/
+            - /master/
