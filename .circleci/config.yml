@@ -55,9 +55,9 @@ jobs:
     - run:
         name: Decrypt Secrets
         command: |
-          mkdir .sbt/gpg
-          openssl aes-256-cbc -d -in secret-pubring.asc -k $ENCRYPTION_KEY > ~/.sbt/gpg/pubring.asc
-          openssl aes-256-cbc -d -in secret-secring.asc -k $ENCRYPTION_KEY > ~/.sbt/gpg/secring.asc
+          mkdir /home/circleci/.sbt/gpg
+          openssl aes-256-cbc -d -in secret-pubring.asc -k $ENCRYPTION_KEY > /home/circleci/.sbt/gpg/pubring.asc
+          openssl aes-256-cbc -d -in secret-secring.asc -k $ENCRYPTION_KEY > /home/circleci/.sbt/gpg/secring.asc
     - run:
         name: Publish Signed
         command: |
