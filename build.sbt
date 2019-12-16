@@ -16,7 +16,7 @@ buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion)
 
 libraryDependencies ++= Seq(
   "com.twitter" %% "finatra-http" % "19.12.0",
-  "io.swagger" % "swagger-core" % "1.6.0",
+  "io.swagger" % "swagger-core" % "1.5.24",
   "io.swagger" %% "swagger-scala-module" % "1.0.6",
   "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
   "net.bytebuddy" % "byte-buddy" % "1.10.5",
