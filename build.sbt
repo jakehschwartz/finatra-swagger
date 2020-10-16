@@ -13,7 +13,7 @@ lazy val jacksonVersion = "2.11.2"
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
 
-swaggerUIVersion := "3.34.0"
+swaggerUIVersion := "3.35.2"
 
 enablePlugins(BuildInfoPlugin)
 buildInfoPackage := "com.jakehschwartz.finatra.swagger"
