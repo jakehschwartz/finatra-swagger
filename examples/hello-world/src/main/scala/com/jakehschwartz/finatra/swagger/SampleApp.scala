@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import com.google.inject.Module
 import com.twitter.finatra.http.HttpServer

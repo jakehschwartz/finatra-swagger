@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import com.twitter.finagle.http.Status
 import com.twitter.finatra.http.EmbeddedHttpServer

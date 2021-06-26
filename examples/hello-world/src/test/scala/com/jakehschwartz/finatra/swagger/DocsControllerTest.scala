@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import com.twitter.conversions.DurationOps._
 import com.twitter.finagle.http.{Response, Status}

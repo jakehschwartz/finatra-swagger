@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import java.util.Date
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.twitter.finatra.http
 
-import com.jakehschwartz.finatra.swagger.FinatraSwagger
+import com.av8data.finatra.swagger.FinatraSwagger
 import com.twitter.finagle.http.{Request, Response, RouteIndex, Status}
 import io.swagger.v3.oas.models.PathItem.HttpMethod
 import io.swagger.v3.oas.models.{OpenAPI, Operation}

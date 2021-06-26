@@ -2,10 +2,16 @@
 inThisBuild(List(
   scalaVersion := "2.13.1",
   crossScalaVersions := Seq("2.12.12", "2.13.1"),
-  organization := "com.jakehschwartz",
-  homepage := Some(url("https://github.com/jakehschwartz/finatra-swagger")),
+  organization := "com.av8data",
+  homepage := Some(url("https://github.com/av8data/finatra-swagger")),
   licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
   developers := List(
+    Developer(
+      "mattav8data",
+      "Matthew Dickinson ",
+      "matt@av8data.com",
+      url("https://av8data.com")
+    ),
     Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
     Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
   )
@@ -18,7 +24,7 @@ lazy val finatraSwagger = project
   .settings(Seq(
     name := "finatra-swagger",
     swaggerUIVersion := "3.47.1",
-    buildInfoPackage := "com.jakehschwartz.finatra.swagger",
+    buildInfoPackage := "com.av8data.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
@@ -83,5 +89,5 @@ val testLibs = Seq(
 )
 
 val exampleLibs = Seq(
-  "com.jakehschwartz" %% "finatra-swagger" % twitterReleaseVersion,
+  "com.av8data" %% "finatra-swagger" % twitterReleaseVersion,
 )
