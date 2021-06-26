@@ -33,7 +33,7 @@ lazy val finatraSwagger = project
       "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
       "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-      "net.bytebuddy" % "byte-buddy" % "1.10.22"
+      "net.bytebuddy" % "byte-buddy" % "1.11.5"
     ) ++ testLibs
   ))
   .settings(settings: _*)
