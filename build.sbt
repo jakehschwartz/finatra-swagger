@@ -23,7 +23,7 @@ lazy val finatraSwagger = project
   .settings(settings: _*)
   .settings(Seq(
     name := "finatra-swagger",
-    swaggerUIVersion := "3.47.1",
+    swaggerUIVersion := "3.50.0",
     buildInfoPackage := "com.av8data.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
     libraryDependencies ++= Seq(
