@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import io.swagger.v3.oas.models._
 import io.swagger.v3.oas.models.media.{Content, MediaType}

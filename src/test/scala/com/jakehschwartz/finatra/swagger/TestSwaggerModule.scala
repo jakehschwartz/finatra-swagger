@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger
+package com.av8data.finatra.swagger
 
 import com.google.inject.Provides
 import io.swagger.v3.oas.models.OpenAPI

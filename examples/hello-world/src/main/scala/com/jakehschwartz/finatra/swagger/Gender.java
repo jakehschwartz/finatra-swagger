@@ -1,4 +1,4 @@
-package com.jakehschwartz.finatra.swagger;
+package com.av8data.finatra.swagger;
 
 public enum Gender {
     Male,
