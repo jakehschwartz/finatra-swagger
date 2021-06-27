@@ -1,0 +1,75 @@
+name: Deploy Scala CI
+
+on:
+  push:
+    branches: [ master ]
+
+concurrency: deploy
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Turnstyle
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v2
+    - uses: olafurpg/setup-scala@v10
+      with:
+        java-version: adopt@1.11.0-11
+    - run: git pull
+    - run: git fetch --unshallow
+    - run: git fetch origin +refs/tags/*:refs/tags/*
+    - name: exports
+      run: export GPG_TTY=$(tty)
+    - name: Import GPG key
+      id: import_gpg
+      uses: crazy-max/ghaction-import-gpg@v3
+      with:
+        gpg-private-key: ${{ secrets.PGP_SECRET }}
+        passphrase: ${{ secrets.PGP_PASSPHRASE }}
+    - name: GPG user IDs
+      run: |
+        echo "fingerprint: ${{ steps.import_gpg.outputs.fingerprint }}"
+        echo "keyid:       ${{ steps.import_gpg.outputs.keyid }}"
+        echo "name:        ${{ steps.import_gpg.outputs.name }}"
+        echo "email:       ${{ steps.import_gpg.outputs.email }}"
+    - name: Cache SBT ivy cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.ivy2/cache
+        key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
+    - name: Cache SBT
+      uses: actions/cache@v1
+      with:
+        path: ~/.sbt
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+    - name: Run tests
+      run: sbt +test hello-world-example/test
+    - name: git tags
+      run: git tag -l
+    - name: git fetch tags
+      run: git fetch --tags --verbose
+    - name: git show ref tags
+      run: git show-ref --tags
+    - name: git set email
+      run: git config --global user.email "av8dataci@av8data.com"
+    - name: git set username
+      run: git config --global user.name "Github CI"
+    - name: git checkout master
+      run: git checkout -f master
+    - name: git log
+      run: git log | head -1000
+    - name: release with-defaults
+      run: sbt "release cross with-defaults"
+      env:
+        PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+        PGP_SECRET: ${{ secrets.PGP_SECRET }}
+        SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+
+

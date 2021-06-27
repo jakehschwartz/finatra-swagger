@@ -1,3 +1,8 @@
+import sbt.Keys._
+import sbt._
+import sbtrelease.ReleaseStateTransformations._
+import sbtrelease._
+
 
 inThisBuild(List(
   scalaVersion := "2.13.1",
@@ -14,13 +19,88 @@ inThisBuild(List(
     ),
     Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
     Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
-  )
+  ),
+  scmInfo := Some(
+    ScmInfo(
+      browseUrl = url("https://github.com/av8data/finatra-swagger"),
+      connection = "https://github.com/av8data/finatra-swagger"
+    )
+  ),
+  publishTo := Some(
+    "releases" at "https://oss.sonatype.org/" + "service/local/staging/deploy/maven2"),
 ))
+
+showCurrentGitBranch
+git.useGitDescribe := true
+git.baseVersion := "0.0.0"
+val VersionRegex = "v([0-9]+.[0-9]+.[0-9]+)-?(.*)?".r
+git.gitTagToVersionNumber := {
+  case VersionRegex(v, "SNAPSHOT") => Some(s"$v-SNAPSHOT")
+  case VersionRegex(v, "") => Some(v)
+  case VersionRegex(v, s) => Some(v)
+  case v => None
+}
+
+(sys.env.get("SONATYPE_USERNAME"), sys.env.get("SONATYPE_PASSWORD")) match {
+  case (Some(username), Some(password)) =>
+    println(s"Using credentials: $username/$password")
+    credentials += Credentials(
+      realm = "Sonatype Nexus Repository Manager",
+      host = "oss.sonatype.org",
+      userName = username,
+      passwd = password)
+  case _ =>
+    println("USERNAME and/or PASSWORD is missing, using local credentials")
+    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+}
+
+lazy val publishSettings = Seq(
+  publishMavenStyle := true,
+  publishArtifact in Compile := true,
+  publishArtifact in Test := false,
+  autoAPIMappings := true
+)
+
+credentials += Credentials(
+  realm = "GnuPG Key ID",
+  host = "gpg",
+  userName = "B98040CCE81E1A52F3358BED4391E8775B145A81", // key identifier
+  passwd = "ignored"
+)
+
+pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray())
+
+releaseVersionBump := sbtrelease.Version.Bump.Next
+releaseVersion := { ver =>
+  Version(ver)
+    .map(_.bump(releaseVersionBump.value).string)
+    .getOrElse(versionFormatError(ver))
+}
+
+releaseProcess := Seq(
+  checkSnapshotDependencies,
+  inquireVersions,
+  setReleaseVersion,
+  runTest,
+  tagRelease,
+  publishArtifacts,
+  releaseStepCommand("sonatypeRelease"),
+  pushChanges
+)
+
+
+lazy val sharedSettings = Seq(
+  organization := "com.av8data",
+  releaseCrossBuild := true,
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+)
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
 lazy val finatraSwagger = project
   .in(file("."))
   .settings(settings: _*)
+  .settings(sharedSettings)
+  .settings(publishSettings)
   .settings(Seq(
     name := "finatra-swagger",
     swaggerUIVersion := "3.50.0",
