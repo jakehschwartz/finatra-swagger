@@ -12,7 +12,7 @@ For older versions, see the original repository by [xiaodongw](https://github.co
 
 The major and minor version of the library matches the Finatra major and minor version:
 ````sbt
-libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "21.3.0"
+libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "21.6.0"
 ````
 
 First, create a subclass of a SwaggerModule

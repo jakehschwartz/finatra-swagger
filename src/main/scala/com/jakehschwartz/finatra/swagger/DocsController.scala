@@ -4,7 +4,7 @@ import java.io.BufferedInputStream
 import java.util.Date
 import com.twitter.finagle.http.{Message, Request}
 import com.twitter.finatra.http.Controller
-import com.twitter.finatra.jackson.ScalaObjectMapper
+import com.twitter.util.jackson.ScalaObjectMapper
 import com.twitter.inject.annotations.Flag
 import io.swagger.v3.oas.models.OpenAPI
 
