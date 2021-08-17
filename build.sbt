@@ -1,7 +1,7 @@
 
 inThisBuild(List(
-  scalaVersion := "2.13.1",
-  crossScalaVersions := Seq("2.12.12", "2.13.1"),
+  scalaVersion := "2.13.6",
+  crossScalaVersions := Seq("2.12.12", "2.13.6"),
   organization := "com.jakehschwartz",
   homepage := Some(url("https://github.com/jakehschwartz/finatra-swagger")),
   licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -69,7 +69,7 @@ lazy val settings: Seq[sbt.Def.SettingsDefinition] = Seq(
 )
 
 
-lazy val twitterReleaseVersion = "21.6.0"
+lazy val twitterReleaseVersion = "21.8.0"
 lazy val jacksonVersion = "2.11.2"
 val testLibs = Seq(
   "com.twitter" %% "finatra-http-server" % twitterReleaseVersion % "test" classifier "tests",
