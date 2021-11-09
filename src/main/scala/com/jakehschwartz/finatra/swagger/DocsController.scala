@@ -24,7 +24,7 @@ class DocsController @Inject()(openAPI: OpenAPI,
   get("/swagger.json") { _: Request =>
     response
       .ok(objectMapper.writeValueAsString(openAPI))
-      .contentTypeJson
+      .contentTypeJson()
   }
 
   get(s"$endpoint") { _: Request =>
