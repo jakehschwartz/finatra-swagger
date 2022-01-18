@@ -1,7 +1,7 @@
 
 inThisBuild(List(
-  scalaVersion := "2.13.7",
-  crossScalaVersions := Seq("2.12.12", "2.13.7"),
+  scalaVersion := "2.13.8",
+  crossScalaVersions := Seq("2.12.12", "2.13.8"),
   organization := "com.jakehschwartz",
   homepage := Some(url("https://github.com/jakehschwartz/finatra-swagger")),
   licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
@@ -22,12 +22,12 @@ lazy val finatraSwagger = project
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
-      "io.swagger.core.v3" % "swagger-project" % "2.1.11",
+      "io.swagger.core.v3" % "swagger-project" % "2.1.12",
       "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.5.2",
       "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
       "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-      "net.bytebuddy" % "byte-buddy" % "1.12.3"
+      "net.bytebuddy" % "byte-buddy" % "1.12.6"
     ) ++ testLibs
   ))
   .settings(settings: _*)
@@ -69,15 +69,15 @@ lazy val settings: Seq[sbt.Def.SettingsDefinition] = Seq(
 )
 
 
-lazy val twitterReleaseVersion = "21.12.0"
-lazy val jacksonVersion = "2.12.0"
+lazy val twitterReleaseVersion = "22.1.0"
+lazy val jacksonVersion = "2.13.1"
 val testLibs = Seq(
   "com.twitter" %% "finatra-http-server" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
-  "ch.qos.logback" % "logback-classic" % "1.2.9",
+  "ch.qos.logback" % "logback-classic" % "1.2.10",
   "org.scalatest" %% "scalatest" % "3.2.10" % "test",
   "org.mockito" %% "mockito-scala" % "1.16.49" % "test"
 )
