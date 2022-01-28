@@ -225,9 +225,7 @@ class FinatraSwagger(val openAPI: OpenAPI) {
     for (entry <- models.entrySet().asScala) {
       openAPI.schema(entry.getKey, entry.getValue)
     }
-    val schema = modelConverters.readAll(typeClass)
-
-    schema.get(typeClass.getSimpleName)
+    models.get(typeClass.getSimpleName)
   }
 
   def convertPath(path: String): String = {
