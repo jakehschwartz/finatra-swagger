@@ -69,8 +69,8 @@ lazy val settings: Seq[sbt.Def.SettingsDefinition] = Seq(
 )
 
 
-lazy val twitterReleaseVersion = "22.2.0"
-lazy val jacksonVersion = "2.13.1"
+lazy val twitterReleaseVersion = "22.3.0"
+lazy val jacksonVersion = "2.13.2"
 val testLibs = Seq(
   "com.twitter" %% "finatra-http-server" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests",
@@ -78,8 +78,8 @@ val testLibs = Seq(
   "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
   "ch.qos.logback" % "logback-classic" % "1.2.11",
-  "org.scalatest" %% "scalatest" % "3.2.10" % "test",
-  "org.mockito" %% "mockito-scala" % "1.16.49" % "test"
+  "org.scalatest" %% "scalatest" % "3.2.11" % "test",
+  "org.mockito" %% "mockito-scala" % "1.17.5" % "test"
 )
 
 val exampleLibs = Seq(
