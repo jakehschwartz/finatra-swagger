@@ -4,7 +4,7 @@ inThisBuild(List(
   crossScalaVersions := Seq("2.12.12", "2.13.8"),
   organization := "com.jakehschwartz",
   homepage := Some(url("https://github.com/jakehschwartz/finatra-swagger")),
-  licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+  licenses := List("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0")),
   developers := List(
     Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
     Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
@@ -17,17 +17,17 @@ lazy val finatraSwagger = project
   .settings(settings: _*)
   .settings(Seq(
     name := "finatra-swagger",
-    swaggerUIVersion := "4.5.2",
+    swaggerUIVersion := "4.10.3",
     buildInfoPackage := "com.jakehschwartz.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
-      "io.swagger.core.v3" % "swagger-project" % "2.1.12",
-      "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.5.2",
+      "io.swagger.core.v3" % "swagger-project" % "2.2.0",
+      "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.6.0",
       "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
       "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-      "net.bytebuddy" % "byte-buddy" % "1.12.8"
+      "net.bytebuddy" % "byte-buddy" % "1.12.9"
     ) ++ testLibs
   ))
   .settings(settings: _*)
@@ -39,29 +39,23 @@ lazy val examples = Project("hello-world-example", file("examples/hello-world"))
     libraryDependencies ++= testLibs,
   ))
   .settings(settings: _*)
-  .settings(skip in publish := true)
+  .settings(publish / skip := true)
   .dependsOn(finatraSwagger)
 
 lazy val settings: Seq[sbt.Def.SettingsDefinition] = Seq(
-  scalacOptions ++= Seq(
-    "-deprecation",
-    "-feature",
-    "-language:existentials",
-    "-language:implicitConversions"
-  ),
   resolvers ++= Seq(
     "Local Ivy" at "file:///"+Path.userHome+"/.ivy2/local",
     "Local Ivy Cache" at "file:///"+Path.userHome+"/.ivy2/cache",
     "Local Maven Repository" at "file:///"+Path.userHome+"/.m2/repository"
   ),
-  parallelExecution in Test := true,
+  Test / parallelExecution := true,
   testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
   javaOptions ++= Seq(
     "-Xss8M",
     "-Xms512M",
     "-Xmx2G"
   ),
-  javaOptions in Test ++= Seq(
+  Test / javaOptions ++= Seq(
     "-Dlog.service.output=/dev/stdout",
     "-Dlog.access.output=/dev/stdout",
     "-Dlog_level=DEBUG"
@@ -69,7 +63,7 @@ lazy val settings: Seq[sbt.Def.SettingsDefinition] = Seq(
 )
 
 
-lazy val twitterReleaseVersion = "22.3.0"
+lazy val twitterReleaseVersion = "22.4.0"
 lazy val jacksonVersion = "2.13.2"
 val testLibs = Seq(
   "com.twitter" %% "finatra-http-server" % twitterReleaseVersion % "test" classifier "tests",
