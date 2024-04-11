@@ -20,7 +20,6 @@ lazy val finatraSwagger = project
     swaggerUIVersion := "4.18.2",
     buildInfoPackage := "com.jakehschwartz.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
-    publishTo := sonatypePublishToBundle.value,
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
       "io.swagger.core.v3" % "swagger-project" % "2.2.8",
