@@ -8,7 +8,7 @@ inThisBuild(List(
   developers := List(
     Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
     Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
-  )
+  ),
 ))
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
@@ -20,6 +20,7 @@ lazy val finatraSwagger = project
     swaggerUIVersion := "4.18.2",
     buildInfoPackage := "com.jakehschwartz.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
+    publishTo := sonatypePublishToBundle.value,
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
       "io.swagger.core.v3" % "swagger-project" % "2.2.8",
