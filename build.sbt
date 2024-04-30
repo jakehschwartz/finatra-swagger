@@ -17,17 +17,17 @@ lazy val finatraSwagger = project
   .settings(settings: _*)
   .settings(Seq(
     name := "finatra-swagger",
-    swaggerUIVersion := "4.18.2",
+    swaggerUIVersion := "5.17.2",
     buildInfoPackage := "com.jakehschwartz.finatra.swagger",
     buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion),
     libraryDependencies ++= Seq(
       "com.twitter" %% "finatra-http-server" % twitterReleaseVersion,
-      "io.swagger.core.v3" % "swagger-project" % "2.2.8",
+      "io.swagger.core.v3" % "swagger-project" % "2.2.21",
       "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.10.0",
       "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
       "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-      "net.bytebuddy" % "byte-buddy" % "1.12.13"
+      "net.bytebuddy" % "byte-buddy" % "1.14.14"
     ) ++ testLibs
   ))
   .settings(settings: _*)
@@ -77,5 +77,5 @@ val testLibs = Seq(
 )
 
 val exampleLibs = Seq(
-  "com.jakehschwartz" %% "finatra-swagger" % twitterReleaseVersion,
+  "com.jakehschwartz" %% "finatra-swagger" % "23.11.1",
 )
