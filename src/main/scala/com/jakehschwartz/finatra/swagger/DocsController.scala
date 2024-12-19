@@ -1,5 +1,7 @@
 package com.jakehschwartz.finatra.swagger
 
+import com.fasterxml.jackson.datatype.joda.JodaModule
+
 import java.io.BufferedInputStream
 import java.util.Date
 import com.twitter.finagle.http.{Message, Request}
@@ -17,9 +19,12 @@ import scala.util.{Failure, Success, Try}
 
 @Singleton
 class DocsController @Inject()(openAPI: OpenAPI,
-                               objectMapper: ScalaObjectMapper,
                                @Flag("swagger.docs.endpoint") endpoint: String)
     extends Controller {
+
+  private val objectMapper = ScalaObjectMapper.builder
+    .camelCaseObjectMapper
+    .registerModule(new JodaModule())
 
   get("/swagger.json") { _: Request =>
     response
