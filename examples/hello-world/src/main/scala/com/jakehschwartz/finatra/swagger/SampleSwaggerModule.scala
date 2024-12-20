@@ -1,9 +1,9 @@
 package com.jakehschwartz.finatra.swagger
 
 import com.google.inject.Provides
-import io.swagger.v3.oas.models.OpenAPI
+import io.swagger.v3.oas.models.{Components, OpenAPI}
 import io.swagger.v3.oas.models.info.Info
-import io.swagger.v3.oas.models.security.SecurityRequirement
+import io.swagger.v3.oas.models.security.{SecurityRequirement, SecurityScheme}
 
 import javax.inject.Singleton
 
@@ -23,6 +23,11 @@ object SampleSwaggerModule extends SwaggerModule {
     openAPI
       .info(info)
       .addSecurityItem(new SecurityRequirement().addList("sampleBasic", "basic"))
+      .components(
+        new Components().addSecuritySchemes(
+          "sampleBasic", new SecurityScheme().`type`(SecurityScheme.Type.HTTP).scheme("basic")
+        )
+      )
 
     openAPI
   }
